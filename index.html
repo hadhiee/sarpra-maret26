@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,56 +27,185 @@
   </script>
   <style>
     /* Table styles */
-    .modern-table { width: 100%; border-collapse: collapse; font-size: 15px; text-align: left; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.10); margin-bottom: 18px; }
-    .modern-table th, .modern-table td { border: none; padding: 12px 14px; font-size: 15px; }
-    .modern-table thead tr { background: theme('colors.primary-soft'); color: theme('colors.primary'); }
-    .modern-table tbody tr:nth-child(even) { background: #f9fafb; }
-    .modern-table tbody tr:hover { background: #f3f4f6; transition: background 0.25s; }
-    .modern-table tfoot tr { background: #f3f4f6; font-weight: 700; }
+    .modern-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      text-align: left;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .10);
+      margin-bottom: 18px;
+    }
+
+    .modern-table th,
+    .modern-table td {
+      border: none;
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+
+    .modern-table thead tr {
+      background: theme('colors.primary-soft');
+      color: theme('colors.primary');
+    }
+
+    .modern-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .modern-table tbody tr:hover {
+      background: #f3f4f6;
+      transition: background 0.25s;
+    }
+
+    .modern-table tfoot tr {
+      background: #f3f4f6;
+      font-weight: 700;
+    }
 
     /* ===== PRESENTATION MODE ===== */
-    body.pres-mode { overflow: hidden; background: #f5f7fb; }
+    body.pres-mode {
+      overflow: hidden;
+      background: #f5f7fb;
+    }
+
     body.pres-mode header:not(.pres-topbar),
     body.pres-mode .container,
     body.pres-mode footer:not(.pres-footerbar),
-    body.pres-mode .top-link { display: none; }
-    .pres-stage { display: none; height: 100vh; grid-template-rows: auto 1fr auto; max-width: 1200px; margin: 0 auto; padding: 16px; gap: 12px; }
-    body.pres-mode .pres-stage { display: grid; }
-    .pres-deck { position: relative; border-radius: 22px; border: 1px solid #e5e7eb; box-shadow: 0 8px 24px rgba(0,0,0,.10); background: linear-gradient(180deg, #fff 0%, #fcfcfd 100%); overflow: hidden; }
-    .pres-slide { position: absolute; inset: 0; padding: clamp(24px, 4vw, 56px); display: grid; grid-template-rows: auto auto 1fr; gap: clamp(12px, 2.3vw, 20px); opacity: 0; transform: translateX(40px) scale(.98); pointer-events: none; transition: opacity 300ms ease, transform 300ms ease; overflow-y: auto; }
-    .pres-slide.active { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; }
-    .pres-progress { width: 100%; height: 10px; border-radius: 999px; background: #f3f4f6; border: 1px solid #e5e7eb; overflow: hidden; }
-    .pres-progress > span { display: block; height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, #7f1d1d, theme('colors.primary')); transition: width 280ms ease; }
-    
+    body.pres-mode .top-link {
+      display: none;
+    }
+
+    .pres-stage {
+      display: none;
+      height: 100vh;
+      grid-template-rows: auto 1fr auto;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      gap: 12px;
+    }
+
+    body.pres-mode .pres-stage {
+      display: grid;
+    }
+
+    .pres-deck {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .10);
+      background: linear-gradient(180deg, #fff 0%, #fcfcfd 100%);
+      overflow: hidden;
+    }
+
+    .pres-slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(24px, 4vw, 56px);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: clamp(12px, 2.3vw, 20px);
+      opacity: 0;
+      transform: translateX(40px) scale(.98);
+      pointer-events: none;
+      transition: opacity 300ms ease, transform 300ms ease;
+      overflow-y: auto;
+    }
+
+    .pres-slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .pres-progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+
+    .pres-progress>span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #7f1d1d, theme('colors.primary'));
+      transition: width 280ms ease;
+    }
+
     @media print {
-      body.pres-mode { overflow: visible; }
-      .pres-topbar, .pres-footerbar { display: none; }
-      .pres-deck { border: 0; box-shadow: none; border-radius: 0; }
-      .pres-slide { position: relative; inset: auto; opacity: 1; transform: none; pointer-events: auto; min-height: 100vh; page-break-after: always; }
-      .pres-slide:last-child { page-break-after: auto; }
+      body.pres-mode {
+        overflow: visible;
+      }
+
+      .pres-topbar,
+      .pres-footerbar {
+        display: none;
+      }
+
+      .pres-deck {
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .pres-slide {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        min-height: 100vh;
+        page-break-after: always;
+      }
+
+      .pres-slide:last-child {
+        page-break-after: auto;
+      }
     }
   </style>
 </head>
+
 <body class="bg-gradient-to-b from-white to-bg text-text font-sans antialiased">
   <div id="top"></div>
 
-  <header class="bg-gradient-to-br from-[#991b1b] to-[#dc2626] text-white p-6 md:p-14 md:pb-10 rounded-3xl shadow-xl mb-8 max-w-6xl mx-auto mt-4 md:mt-8">
+  <header
+    class="bg-gradient-to-br from-[#991b1b] to-[#dc2626] text-white p-6 md:p-14 md:pb-10 rounded-3xl shadow-xl mb-8 max-w-6xl mx-auto mt-4 md:mt-8">
     <div class="max-w-6xl mx-auto">
-      <div class="inline-block bg-white/10 border border-white/20 px-4 py-2 rounded-full text-sm mb-4 backdrop-blur-sm">Rapat Bulanan Maret 2026 • SMK Telkom Malang</div>
-      <h1 class="text-3xl md:text-5xl font-bold mb-3 leading-tight">Rangkuman Bidang IT, Laboratorium, dan Sarana Prasarana</h1>
+      <div class="inline-block bg-white/10 border border-white/20 px-4 py-2 rounded-full text-sm mb-4 backdrop-blur-sm">
+        Rapat Bulanan Maret 2026 • SMK Telkom Malang</div>
+      <h1 class="text-3xl md:text-5xl font-bold mb-3 leading-tight">Rangkuman Bidang IT, Laboratorium, dan Sarana
+        Prasarana</h1>
       <p class="text-lg opacity-90 max-w-3xl mb-0">
-        Arah penguatan ekosistem digital, pengembangan laboratorium, perlindungan karya inovasi, serta pembaruan sarana prasarana untuk mendukung pembelajaran yang aman, relevan, dan berkelanjutan.
+        Arah penguatan ekosistem digital, pengembangan laboratorium, perlindungan karya inovasi, serta pembaruan sarana
+        prasarana untuk mendukung pembelajaran yang aman, relevan, dan berkelanjutan.
       </p>
       <nav class="flex flex-wrap gap-2.5 mt-6">
-        <a href="#it" class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">IT</a>
-        <a href="#lab" class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Laboratorium</a>
-        <a href="#sarpras" class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Sarpras</a>
-        <a href="#utilitas" class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Utilitas</a>
-        <a href="#penutup" class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Penutup</a>
+        <a href="#it"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">IT</a>
+        <a href="#lab"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Laboratorium</a>
+        <a href="#sarpras"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Sarpras</a>
+        <a href="#utilitas"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Utilitas</a>
+        <a href="#personnel"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Personil</a>
+        <a href="#penutup"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Penutup</a>
       </nav>
       <div class="mt-4">
-        <a href="#" onclick="startPresentasi(); return false;" class="inline-flex items-center gap-2 text-primary bg-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:bg-red-50 transition-colors">
-          Buka Mode Presentasi <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+        <a href="#" onclick="startPresentasi(); return false;"
+          class="inline-flex items-center gap-2 text-primary bg-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:bg-red-50 transition-colors">
+          Buka Mode Presentasi <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </a>
       </div>
     </div>
@@ -85,7 +215,9 @@
     <!-- IT Section -->
     <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="it">
       <div class="flex items-center gap-4 mb-6">
-        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">1</div>
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          1</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Bidang IT</h2>
           <p class="text-muted m-0 mt-1">Penguatan platform, perangkat pembelajaran, dan keamanan data.</p>
@@ -93,16 +225,20 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Arah Platform Digital Yayasan</h3>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
-            <li>Yayasan saat ini mulai mengarahkan penggunaan <strong>Microsoft 365</strong> sebagai platform utama kolaborasi.</li>
-            <li>Beberapa aktivitas yang sebelumnya menggunakan <strong>Google Workspace for Education</strong> akan mulai diselaraskan ke ekosistem Microsoft.</li>
+            <li>Yayasan saat ini mulai mengarahkan penggunaan <strong>Microsoft 365</strong> sebagai platform utama
+              kolaborasi.</li>
+            <li>Beberapa aktivitas yang sebelumnya menggunakan <strong>Google Workspace for Education</strong> akan
+              mulai diselaraskan ke ekosistem Microsoft.</li>
             <li>Tujuannya adalah integrasi akun, dokumen, komunikasi, dan pengelolaan akses yang lebih terpusat.</li>
           </ul>
         </article>
 
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Perubahan Platform Meeting</h3>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
             <li>Penggunaan <strong>Zoom</strong> secara bertahap akan beralih ke <strong>Microsoft Teams</strong>.</li>
@@ -111,25 +247,32 @@
           </ul>
         </article>
 
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Penguatan Fasilitas IT</h3>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
-            <li>Kebutuhan <strong>software</strong> dan <strong>alat praktik</strong> laboratorium saat ini sedang dikompulir oleh yayasan.</li>
-            <li>Langkah ini diarahkan untuk mendukung pembelajaran berbasis proyek, praktikum, dan Teaching Factory.</li>
+            <li>Kebutuhan <strong>software</strong> dan <strong>alat praktik</strong> laboratorium saat ini sedang
+              dikompulir oleh yayasan.</li>
+            <li>Langkah ini diarahkan untuk mendukung pembelajaran berbasis proyek, praktikum, dan Teaching Factory.
+            </li>
             <li>Sekolah terus menyesuaikan kebutuhan perangkat dengan perkembangan pembelajaran dan industri.</li>
           </ul>
         </article>
       </div>
 
       <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6">
-        <strong>Awareness PDP:</strong> perlindungan data pribadi siswa perlu terus dikuatkan. Data seperti NIK, alamat, nomor HP, data orang tua, dan data akademik harus dikelola dengan hati-hati, tidak dibagikan tanpa kebutuhan yang jelas, dan diupayakan menggunakan akun resmi sekolah.
+        <strong>Awareness PDP:</strong> perlindungan data pribadi siswa perlu terus dikuatkan. Data seperti NIK, alamat,
+        nomor HP, data orang tua, dan data akademik harus dikelola dengan hati-hati, tidak dibagikan tanpa kebutuhan
+        yang jelas, dan diupayakan menggunakan akun resmi sekolah.
       </div>
     </section>
 
     <!-- Lab Section -->
     <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="lab">
       <div class="flex items-center gap-4 mb-6">
-        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">2</div>
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          2</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Bidang Laboratorium</h2>
           <p class="text-muted m-0 mt-1">Pengembangan wadah kewirausahaan siswa dan penguatan budaya inovasi.</p>
@@ -137,38 +280,59 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Wadah Entrepreneur Siswa</h3>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
-            <li>Tim laboratorium di bawah koordinasi <strong>Kaur Lab</strong> sedang menyusun wadah bagi siswa entrepreneur, khususnya pada bidang <strong>non-IT</strong>.</li>
-            <li>Program ini diarahkan untuk mendukung program sekolah <strong>BMW: Bekerja, Melanjutkan, dan Wirausaha</strong>.</li>
-            <li>Harapannya, karya siswa tidak berhenti sebagai tugas, tetapi berkembang menjadi produk atau usaha yang bernilai.</li>
+            <li>Tim laboratorium di bawah koordinasi <strong>Kaur Lab</strong> sedang menyusun wadah bagi siswa
+              entrepreneur, khususnya pada bidang <strong>non-IT</strong>.</li>
+            <li>Program ini diarahkan untuk mendukung program sekolah <strong>BMW: Bekerja, Melanjutkan, dan
+                Wirausaha</strong>.</li>
+            <li>Harapannya, karya siswa tidak berhenti sebagai tugas, tetapi berkembang menjadi produk atau usaha yang
+              bernilai.</li>
           </ul>
         </article>
 
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">HKI Program Komputer</h3>
-          <p class="text-gray-700 mb-4">Beberapa hasil kerja tim telah meloloskan pencatatan atau pengajuan HKI kategori program komputer.</p>
+          <p class="text-gray-700 mb-4">Beberapa hasil kerja tim telah meloloskan pencatatan atau pengajuan HKI kategori
+            program komputer.</p>
           <div class="flex flex-wrap gap-2">
-            <a href="https://molecul-game.vercel.app" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">MoLeCuL ↗</a>
-            <a href="https://mexpo.id/" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Mexpo ↗</a>
-            <a href="https://myedotel.id/" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">myedotel.id ↗</a>
-            <a href="https://telkom-society.smktelkom-mlg.sch.id/" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Telkom Society ↗</a>
-            <a href="https://portofolio.smktelkom-mlg.sch.id/" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Portofolio Siswa ↗</a>
-            <a href="https://app.smktelkom-mlg.sch.id" target="_blank" rel="noopener" class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Moklet App ↗</a>
+            <a href="https://molecul-game.vercel.app" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">MoLeCuL
+              ↗</a>
+            <a href="https://mexpo.id/" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Mexpo
+              ↗</a>
+            <a href="https://myedotel.id/" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">myedotel.id
+              ↗</a>
+            <a href="https://telkom-society.smktelkom-mlg.sch.id/" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Telkom
+              Society ↗</a>
+            <a href="https://portofolio.smktelkom-mlg.sch.id/" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Portofolio
+              Siswa ↗</a>
+            <a href="https://app.smktelkom-mlg.sch.id" target="_blank" rel="noopener"
+              class="bg-gray-50 border border-gray-200 hover:border-gray-300 px-4 py-2 rounded-full font-medium text-gray-800 transition-colors flex items-center gap-1">Moklet
+              App ↗</a>
           </div>
         </article>
       </div>
 
       <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6">
-        <strong>Makna strategis:</strong> laboratorium tidak hanya menjadi tempat praktik, tetapi juga ruang lahirnya inovasi, portofolio, kewirausahaan, dan karya yang memiliki perlindungan hukum melalui HKI.
+        <strong>Makna strategis:</strong> laboratorium tidak hanya menjadi tempat praktik, tetapi juga ruang lahirnya
+        inovasi, portofolio, kewirausahaan, dan karya yang memiliki perlindungan hukum melalui HKI.
       </div>
     </section>
 
     <!-- Sarpras Section -->
     <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="sarpras">
       <div class="flex items-center gap-4 mb-6">
-        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">3</div>
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          3</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Bidang Sarana Prasarana</h2>
           <p class="text-muted m-0 mt-1">Update kebutuhan prioritas yang telah diusulkan melalui program CAPEX.</p>
@@ -176,7 +340,8 @@
       </div>
 
       <div class="grid grid-cols-1 gap-6">
-        <article class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <article
+          class="bg-card border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-shadow duration-300">
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Usulan Kebutuhan CAPEX</h3>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
             <li>Pembangunan atau pengembangan <strong>MTP</strong>.</li>
@@ -194,56 +359,72 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div class="flex flex-col h-full">
             <h3 class="text-xl font-semibold mb-4 text-gray-900">Gedung MTP (Malang Techno Park)</h3>
-            <img src="mtp.png" alt="Gedung MTP SMK Telkom Malang" class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
-            <p class="text-gray-500 text-sm mt-2 mb-4">Gedung MTP merupakan pusat pengembangan inovasi, Teaching Factory, dan kolaborasi industri di SMK Telkom Malang.</p>
-            <a href="https://studio.tripo3d.ai/3d-model/0978e235-db57-474f-9d61-c999b6ed9067?invite_code=NYGP33" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-colors shadow-md mx-auto w-max mt-auto">Lihat 3D Gedung MTP ↗</a>
+            <img src="mtp.png" alt="Gedung MTP SMK Telkom Malang"
+              class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
+            <p class="text-gray-500 text-sm mt-2 mb-4">Gedung MTP merupakan pusat pengembangan inovasi, Teaching
+              Factory, dan kolaborasi industri di SMK Telkom Malang.</p>
+            <a href="https://studio.tripo3d.ai/3d-model/0978e235-db57-474f-9d61-c999b6ed9067?invite_code=NYGP33"
+              target="_blank" rel="noopener"
+              class="inline-block px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-colors shadow-md mx-auto w-max mt-auto">Lihat
+              3D Gedung MTP ↗</a>
           </div>
           <div class="flex flex-col h-full">
             <h3 class="text-xl font-semibold mb-4 text-gray-900">Proses Bisnis Unit Sarpras</h3>
-            <img src="probis.png" alt="Proses Bisnis Unit Sarpras SMK Telkom Malang" class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
-            <p class="text-gray-500 text-sm mt-2">Diagram proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom Malang.</p>
+            <img src="probis.png" alt="Proses Bisnis Unit Sarpras SMK Telkom Malang"
+              class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
+            <p class="text-gray-500 text-sm mt-2">Diagram proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom
+              Malang.</p>
           </div>
         </div>
       </div>
 
       <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6">
-        <strong>Awareness:</strong> proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom Malang harus dipahami oleh semua pihak agar dapat berjalan dengan efisien dan terstruktur.
+        <strong>Awareness:</strong> proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom Malang harus dipahami
+        oleh semua pihak agar dapat berjalan dengan efisien dan terstruktur.
       </div>
     </section>
 
     <!-- Utilitas Section -->
     <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="utilitas">
       <div class="flex items-center gap-4 mb-6">
-        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">4</div>
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          4</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Informasi Utilitas Gedung</h2>
-          <p class="text-muted m-0 mt-1">Monitoring biaya operasional listrik dan air sebagai bagian dari efisiensi sekolah.</p>
+          <p class="text-muted m-0 mt-1">Monitoring biaya operasional listrik dan air sebagai bagian dari efisiensi
+            sekolah.</p>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6">
-        <div class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+        <div
+          class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
           <div class="text-4xl font-bold text-primary mb-2 leading-tight">3</div>
           <div class="text-gray-500 text-sm">Panel listrik utama yang digunakan untuk operasional</div>
         </div>
-        <div class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
-          <div class="text-3xl font-bold text-primary mb-2 leading-tight whitespace-nowrap">Rp17,3<span class="text-2xl">Jt</span></div>
+        <div
+          class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+          <div class="text-3xl font-bold text-primary mb-2 leading-tight whitespace-nowrap">Rp17,3<span
+              class="text-2xl">Jt</span></div>
           <div class="text-gray-500 text-sm">Total tagihan listrik sekitar bulan Maret 2026</div>
         </div>
-        <div class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
+        <div
+          class="bg-card border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
           <div class="text-4xl font-bold text-primary mb-2 leading-tight">PDAM</div>
           <div class="text-gray-500 text-sm">Penggunaan air juga terus dimonitor agar tetap efisien</div>
         </div>
       </div>
 
       <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6">
-        Efisiensi utilitas memerlukan dukungan bersama, terutama dalam kebiasaan mematikan lampu, AC, dan perangkat setelah digunakan serta menjaga penggunaan air secara bijak.
+        Efisiensi utilitas memerlukan dukungan bersama, terutama dalam kebiasaan mematikan lampu, AC, dan perangkat
+        setelah digunakan serta menjaga penggunaan air secara bijak.
       </div>
 
       <div class="bg-card border border-gray-200 rounded-2xl p-6 mt-6 shadow-sm overflow-hidden">
         <h3 class="text-xl font-bold text-gray-900 mb-1">📊 Perbandingan Tagihan PLN & PDAM</h3>
         <p class="text-gray-500 text-sm mb-6">Rekap perbandingan biaya utilitas 3 bulan terakhir (Jan-Mar 2026)</p>
-        
+
         <div class="overflow-x-auto rounded-xl border border-gray-200 mb-8">
           <table class="w-full text-sm text-center text-gray-700">
             <thead class="text-xs text-primary uppercase bg-primary-soft">
@@ -256,25 +437,29 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr class="bg-white hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – Yayasan Sandykara</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> –
+                  Yayasan Sandykara</td>
                 <td class="px-6 py-4">Rp4.592.250</td>
                 <td class="px-6 py-4">Rp6.556.510</td>
                 <td class="px-6 py-4">Rp4.631.850</td>
               </tr>
               <tr class="bg-gray-50 hover:bg-gray-100">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – SMK Telkom</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – SMK
+                  Telkom</td>
                 <td class="px-6 py-4">Rp7.814.800</td>
                 <td class="px-6 py-4">Rp11.782.720</td>
                 <td class="px-6 py-4">Rp7.814.800</td>
               </tr>
               <tr class="bg-white hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – Kantin</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> –
+                  Kantin</td>
                 <td class="px-6 py-4">Rp2.126.160</td>
                 <td class="px-6 py-4">Rp5.994.190</td>
                 <td class="px-6 py-4">Rp3.833.910</td>
               </tr>
               <tr class="bg-gray-50 hover:bg-gray-100">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PDAM</strong> – Yys Sandhikara</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PDAM</strong> – Yys
+                  Sandhikara</td>
                 <td class="px-6 py-4">Rp1.041.000</td>
                 <td class="px-6 py-4">Rp792.500</td>
                 <td class="px-6 py-4">Rp1.072.500</td>
@@ -290,10 +475,116 @@
             </tfoot>
           </table>
         </div>
-        
+
         <div class="h-80 w-full relative">
           <canvas id="billingChart"></canvas>
         </div>
+      </div>
+    </section>
+
+    <!-- Personnel Section -->
+    <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="personnel">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          5</div>
+        <div>
+          <h2 class="text-2xl font-bold m-0 text-gray-900">Personil Unit IT, Lab, dan Sarpras</h2>
+          <p class="text-muted m-0 mt-1">Struktur organisasi dan penanggung jawab bidang.</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-gray-200">
+        <table class="w-full text-sm text-left text-gray-700">
+          <thead class="text-xs text-primary uppercase bg-primary-soft">
+            <tr>
+              <th scope="col" class="px-4 py-3">NO</th>
+              <th scope="col" class="px-4 py-3">NIP</th>
+              <th scope="col" class="px-4 py-3">NAMA</th>
+              <th scope="col" class="px-4 py-3">JABATAN</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">1</td>
+              <td class="px-4 py-3">07860075</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Mokhamad Hadi Wijaya, M.T.</td>
+              <td class="px-4 py-3">Waka. Bidang IT, Lab., dan Sarpra</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">2</td>
+              <td class="px-4 py-3">25950025</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Whyna Agustin, S.Pd.</td>
+              <td class="px-4 py-3">Kaur IT (Information of Technology)</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">3</td>
+              <td class="px-4 py-3">22880006</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Muhammad Chusni Agus, M.Pd.</td>
+              <td class="px-4 py-3">Kaur. Laboratorium</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">4</td>
+              <td class="px-4 py-3">11820014</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Ekon Anjar Poernomo, S.Kom.</td>
+              <td class="px-4 py-3">Kaur Sarana dan Prasarana</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">5</td>
+              <td class="px-4 py-3">25940004</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Amalia Ramadhanty, S.Kom.</td>
+              <td class="px-4 py-3">PIC. Administrasi, Tata Kelola, dan Keuangan</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">6</td>
+              <td class="px-4 py-3">20820006</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Zainul Abidin, S.Kom.</td>
+              <td class="px-4 py-3">PIC. IT. Mobile Developer & Technical Support</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">7</td>
+              <td class="px-4 py-3">25960026</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Zakaria, S.Pd.</td>
+              <td class="px-4 py-3">PIC. IT. Backend & DevOps</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">8</td>
+              <td class="px-4 py-3">25980017</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Chandra Wijaya Kristanto, S.Pd.</td>
+              <td class="px-4 py-3">PIC. IT. UI/UX & Frontend Developer</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">9</td>
+              <td class="px-4 py-3">26960021</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Muhammad Bagus Arifin, M.Pd.</td>
+              <td class="px-4 py-3">PIC. IT. Technical Support</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">10</td>
+              <td class="px-4 py-3">26910009</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Nico Rachmacandrana, S.ST.</td>
+              <td class="px-4 py-3">PIC. IT. Infrastructure & Network</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">11</td>
+              <td class="px-4 py-3">25890012</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Firmansyah Ayatullah, S.Kom.</td>
+              <td class="px-4 py-3">PIC. Laboratorium Riset</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">12</td>
+              <td class="px-4 py-3">25900022</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Rudi Mistriono, S.Kom.</td>
+              <td class="px-4 py-3">PIC. Pengelola Dapodik & Inventaris Aset Sekolah</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-3">13</td>
+              <td class="px-4 py-3">95710035</td>
+              <td class="px-4 py-3 font-medium text-gray-900">Setdiyoko, S.E.</td>
+              <td class="px-4 py-3">PIC. Sapra, Kebersihan, Keamanan dan Perlengkapan</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -303,46 +594,63 @@
         <h2 class="text-3xl font-bold mb-4">Penutup</h2>
         <div class="space-y-4 text-gray-100 leading-relaxed max-w-4xl opacity-90">
           <p>
-            Tim IT, Laboratorium, dan Sarana Prasarana terus berupaya mendukung proses pembelajaran melalui penguatan infrastruktur, pengembangan ekosistem digital, penyediaan ruang inovasi, serta peningkatan kualitas fasilitas sekolah.
+            Tim IT, Laboratorium, dan Sarana Prasarana terus berupaya mendukung proses pembelajaran melalui penguatan
+            infrastruktur, pengembangan ekosistem digital, penyediaan ruang inovasi, serta peningkatan kualitas
+            fasilitas sekolah.
           </p>
           <p>
-            Dukungan seluruh guru sangat penting dalam menjaga fasilitas, beradaptasi dengan platform yang sedang dikembangkan yayasan, serta membangun budaya pembelajaran yang aman, inovatif, dan berkelanjutan.
+            Dukungan seluruh guru sangat penting dalam menjaga fasilitas, beradaptasi dengan platform yang sedang
+            dikembangkan yayasan, serta membangun budaya pembelajaran yang aman, inovatif, dan berkelanjutan.
           </p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center text-muted text-sm p-6 bg-card rounded-t-3xl md:rounded-3xl shadow-lg mt-8 mb-0 md:mb-6 max-w-6xl mx-auto md:mx-auto mx-4 sm:mx-6">
+  <footer
+    class="text-center text-muted text-sm p-6 bg-card rounded-t-3xl md:rounded-3xl shadow-lg mt-8 mb-0 md:mb-6 max-w-6xl mx-auto md:mx-auto mx-4 sm:mx-6">
     Disusun untuk kebutuhan rapat bulanan • SMK Telkom Malang • Maret 2026
   </footer>
 
-  <a class="fixed right-6 bottom-6 bg-primary text-white w-12 h-12 flex items-center justify-center rounded-full shadow-xl text-xl hover:bg-red-700 transition-colors hover:-translate-y-1 transform duration-200 z-50 text-decoration-none" href="#top" aria-label="Kembali ke atas">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+  <a class="fixed right-6 bottom-6 bg-primary text-white w-12 h-12 flex items-center justify-center rounded-full shadow-xl text-xl hover:bg-red-700 transition-colors hover:-translate-y-1 transform duration-200 z-50 text-decoration-none"
+    href="#top" aria-label="Kembali ke atas">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
   </a>
 
   <!-- ===== PRESENTATION STAGE ===== -->
   <div class="pres-stage" id="presStage">
-    <header class="pres-topbar flex items-center justify-between gap-3 bg-gradient-to-br from-[#991b1b] to-[#dc2626] rounded-full px-5 py-2.5 text-white">
+    <header
+      class="pres-topbar flex items-center justify-between gap-3 bg-gradient-to-br from-[#991b1b] to-[#dc2626] rounded-full px-5 py-2.5 text-white">
       <div class="font-bold text-sm tracking-wide">MODE PRESENTASI — RAPAT BULANAN</div>
-      <div class="text-sm opacity-90 hidden md:block" id="presCounter">Slide 1/11</div>
-      <button class="bg-white/20 border border-white/30 text-white px-4 py-1.5 rounded-full cursor-pointer text-sm font-bold hover:bg-white/30 transition-colors" onclick="exitPresentasi()">✕ Keluar</button>
+      <div class="text-sm opacity-90 hidden md:block" id="presCounter">Slide 1/12</div>
+      <button
+        class="bg-white/20 border border-white/30 text-white px-4 py-1.5 rounded-full cursor-pointer text-sm font-bold hover:bg-white/30 transition-colors"
+        onclick="exitPresentasi()">✕ Keluar</button>
     </header>
 
     <main class="pres-deck" id="presDeck">
       <!-- Slide 1: Pembuka -->
       <section class="pres-slide active" data-title="Pembuka">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Maret 2026 · SMK Telkom Malang</span>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight m-0 text-gray-900">Rangkuman Bidang IT, Laboratorium, dan Sarana Prasarana</h2>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Maret
+          2026 · SMK Telkom Malang</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight m-0 text-gray-900">Rangkuman Bidang IT,
+          Laboratorium, dan Sarana Prasarana</h2>
         <div class="self-start grid gap-4 max-w-4xl">
-          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Arah penguatan ekosistem digital, pengembangan laboratorium, perlindungan karya inovasi, serta pembaruan sarana prasarana untuk mendukung pembelajaran yang aman dan berkelanjutan.</p>
-          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4">Gunakan panah kiri/kanan atau tombol Prev/Next untuk berpindah slide. Tekan F untuk fullscreen.</div>
+          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Arah penguatan ekosistem digital,
+            pengembangan laboratorium, perlindungan karya inovasi, serta pembaruan sarana prasarana untuk mendukung
+            pembelajaran yang aman dan berkelanjutan.</p>
+          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4">Gunakan
+            panah kiri/kanan atau tombol Prev/Next untuk berpindah slide. Tekan F untuk fullscreen.</div>
         </div>
       </section>
 
       <!-- Slide 2: Agenda -->
       <section class="pres-slide" data-title="Agenda">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Agenda</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Agenda</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Alur Presentasi</h2>
         <ul class="list-disc pl-8 text-xl md:text-2xl space-y-3 text-gray-700 max-w-4xl">
           <li>Bidang IT: platform digital, meeting, fasilitas, dan awareness PDP.</li>
@@ -355,39 +663,50 @@
 
       <!-- Slide 3: Bidang IT -->
       <section class="pres-slide" data-title="Bidang IT">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">1 · Bidang IT</span>
-        <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Penguatan Platform, Perangkat, dan Tata Kelola Data</h2>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">1
+          · Bidang IT</span>
+        <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Penguatan Platform, Perangkat, dan Tata Kelola Data
+        </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl">
           <article class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
             <h3 class="text-xl font-bold mb-2">Platform Digital</h3>
-            <p class="text-gray-700 text-lg">Ekosistem yayasan diarahkan ke Microsoft 365 untuk kolaborasi yang lebih terpusat.</p>
+            <p class="text-gray-700 text-lg">Ekosistem yayasan diarahkan ke Microsoft 365 untuk kolaborasi yang lebih
+              terpusat.</p>
           </article>
           <article class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
             <h3 class="text-xl font-bold mb-2">Platform Meeting</h3>
-            <p class="text-gray-700 text-lg">Transisi bertahap dari Zoom ke Microsoft Teams untuk meeting dan koordinasi internal.</p>
+            <p class="text-gray-700 text-lg">Transisi bertahap dari Zoom ke Microsoft Teams untuk meeting dan koordinasi
+              internal.</p>
           </article>
           <article class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
             <h3 class="text-xl font-bold mb-2">Fasilitas IT</h3>
-            <p class="text-gray-700 text-lg">Kompulir software dan alat praktik untuk mendukung praktikum dan Teaching Factory.</p>
+            <p class="text-gray-700 text-lg">Kompulir software dan alat praktik untuk mendukung praktikum dan Teaching
+              Factory.</p>
           </article>
         </div>
       </section>
 
       <!-- Slide 4: PDP -->
       <section class="pres-slide" data-title="Awareness PDP">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Poin Kritis</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Poin
+          Kritis</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Awareness Perlindungan Data Pribadi (PDP)</h2>
         <ul class="list-disc pl-8 text-xl md:text-2xl space-y-3 text-gray-700 max-w-4xl">
           <li>Data siswa seperti NIK, alamat, nomor HP, data orang tua, dan data akademik harus dijaga ketat.</li>
           <li>Pembagian data hanya untuk kebutuhan kerja yang jelas dan dapat dipertanggungjawabkan.</li>
           <li>Gunakan akun resmi sekolah dan alur komunikasi resmi untuk menekan risiko kebocoran data.</li>
         </ul>
-        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-4xl">Target: budaya sadar data di semua unit kerja, bukan hanya tim IT.</div>
+        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-4xl">
+          Target: budaya sadar data di semua unit kerja, bukan hanya tim IT.</div>
       </section>
 
       <!-- Slide 5: Laboratorium -->
       <section class="pres-slide" data-title="Laboratorium">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">2 · Bidang Laboratorium</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">2
+          · Bidang Laboratorium</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Wadah Inovasi dan Entrepreneur Siswa</h2>
         <ul class="list-disc pl-8 text-xl md:text-2xl space-y-3 text-gray-700 max-w-4xl">
           <li>Pengembangan wadah entrepreneur siswa non-IT di bawah koordinasi Kaur Lab.</li>
@@ -398,33 +717,49 @@
 
       <!-- Slide 6: HKI -->
       <section class="pres-slide" data-title="Capaian HKI">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Capaian HKI</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Capaian
+          HKI</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Program Komputer yang Sudah Tercatat/Diajukan</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl">
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://molecul-game.vercel.app" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">MoLeCuL ↗</h3><p class="text-gray-600 text-sm m-0">Moklet Learning Culture</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://molecul-game.vercel.app" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">MoLeCuL ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Moklet Learning Culture</p>
           </a>
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://mexpo.id/" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Mexpo ↗</h3><p class="text-gray-600 text-sm m-0">Platform eksibisi karya dan kegiatan.</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://mexpo.id/" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Mexpo ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Platform eksibisi karya dan kegiatan.</p>
           </a>
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://myedotel.id/" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">myedotel.id ↗</h3><p class="text-gray-600 text-sm m-0">Inisiatif layanan dan sistem digital sekolah.</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://myedotel.id/" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">myedotel.id ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Inisiatif layanan dan sistem digital sekolah.</p>
           </a>
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://telkom-society.smktelkom-mlg.sch.id/" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Telkom Society ↗</h3><p class="text-gray-600 text-sm m-0">Ekosistem komunitas dan kolaborasi.</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://telkom-society.smktelkom-mlg.sch.id/" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Telkom Society ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Ekosistem komunitas dan kolaborasi.</p>
           </a>
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://portofolio.smktelkom-mlg.sch.id/" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Portofolio Siswa ↗</h3><p class="text-gray-600 text-sm m-0">Dokumentasi kompetensi dan rekam karya.</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://portofolio.smktelkom-mlg.sch.id/" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Portofolio Siswa ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Dokumentasi kompetensi dan rekam karya.</p>
           </a>
-          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors" href="https://app.smktelkom-mlg.sch.id" target="_blank" rel="noopener">
-            <h3 class="text-lg font-bold text-gray-900 mb-1">Moklet App ↗</h3><p class="text-gray-600 text-sm m-0">Aplikasi pendukung proses pembelajaran.</p>
+          <a class="bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:border-gray-300 transition-colors"
+            href="https://app.smktelkom-mlg.sch.id" target="_blank" rel="noopener">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Moklet App ↗</h3>
+            <p class="text-gray-600 text-sm m-0">Aplikasi pendukung proses pembelajaran.</p>
           </a>
         </div>
       </section>
 
       <!-- Slide 7: Sarpras -->
       <section class="pres-slide" data-title="Sarpras">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">3 · Bidang Sarpras</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">3
+          · Bidang Sarpras</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Update Usulan CAPEX 2026</h2>
         <ul class="list-disc pl-8 text-xl md:text-2xl space-y-3 text-gray-700 max-w-4xl">
           <li>Pembangunan/pengembangan MTP.</li>
@@ -432,24 +767,39 @@
           <li>Perbaikan dak/atap masjid serta ruang pendukung Teaching Factory di Lab 3.</li>
           <li>Rencana pengembangan lantai 3 Gedung Selatan.</li>
         </ul>
-        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-4xl">Status: usulan sudah diajukan ke yayasan dan berada pada tahap evaluasi prioritas.</div>
+        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-4xl">
+          Status: usulan sudah diajukan ke yayasan dan berada pada tahap evaluasi prioritas.</div>
       </section>
 
       <!-- Slide 8: Utilitas -->
       <section class="pres-slide" data-title="Utilitas">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">4 · Utilitas Gedung</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">4
+          · Utilitas Gedung</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Monitoring Biaya Operasional dan Efisiensi</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl">
-          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center"><div class="text-5xl font-bold text-primary mb-2">3</div><div class="text-gray-600 text-sm">Panel listrik utama untuk operasional sekolah</div></div>
-          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center"><div class="text-4xl font-bold text-primary mb-2">Rp17.3Jt</div><div class="text-gray-600 text-sm">Estimasi total tagihan listrik sekitar Maret 2026</div></div>
-          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center"><div class="text-5xl font-bold text-primary mb-2">PDAM</div><div class="text-gray-600 text-sm">Penggunaan air dipantau untuk efisiensi berkelanjutan</div></div>
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center">
+            <div class="text-5xl font-bold text-primary mb-2">3</div>
+            <div class="text-gray-600 text-sm">Panel listrik utama untuk operasional sekolah</div>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center">
+            <div class="text-4xl font-bold text-primary mb-2">Rp17.3Jt</div>
+            <div class="text-gray-600 text-sm">Estimasi total tagihan listrik sekitar Maret 2026</div>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center">
+            <div class="text-5xl font-bold text-primary mb-2">PDAM</div>
+            <div class="text-gray-600 text-sm">Penggunaan air dipantau untuk efisiensi berkelanjutan</div>
+          </div>
         </div>
-        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-5xl">Efisiensi utilitas memerlukan dukungan bersama: matikan lampu, AC, dan perangkat setelah digunakan.</div>
+        <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-4 max-w-5xl">
+          Efisiensi utilitas memerlukan dukungan bersama: matikan lampu, AC, dan perangkat setelah digunakan.</div>
       </section>
 
       <!-- Slide 8b: Billing Perbandingan -->
       <section class="pres-slide" data-title="Billing Jan-Mar">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">📊 Perbandingan Tagihan</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">📊
+          Perbandingan Tagihan</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">PLN & PDAM — Januari s.d. Maret 2026</h2>
         <div class="max-w-5xl w-full">
           <div class="overflow-x-auto rounded-xl border border-gray-200 mb-4 bg-white shadow-sm">
@@ -464,25 +814,29 @@
               </thead>
               <tbody class="divide-y divide-gray-200">
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – Yayasan Sandykara</td>
+                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> –
+                    Yayasan Sandykara</td>
                   <td class="px-6 py-3">Rp4.592.250</td>
                   <td class="px-6 py-3">Rp6.556.510</td>
                   <td class="px-6 py-3">Rp4.631.850</td>
                 </tr>
                 <tr class="bg-gray-50 hover:bg-gray-100">
-                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – SMK Telkom</td>
+                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – SMK
+                    Telkom</td>
                   <td class="px-6 py-3">Rp7.814.800</td>
                   <td class="px-6 py-3">Rp11.782.720</td>
                   <td class="px-6 py-3">Rp7.814.800</td>
                 </tr>
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> – Kantin</td>
+                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PLN</strong> –
+                    Kantin</td>
                   <td class="px-6 py-3">Rp2.126.160</td>
                   <td class="px-6 py-3">Rp5.994.190</td>
                   <td class="px-6 py-3">Rp3.833.910</td>
                 </tr>
                 <tr class="bg-gray-50 hover:bg-gray-100">
-                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PDAM</strong> – Yys Sandhikara</td>
+                  <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap text-left"><strong>PDAM</strong> –
+                    Yys Sandhikara</td>
                   <td class="px-6 py-3">Rp1.041.000</td>
                   <td class="px-6 py-3">Rp792.500</td>
                   <td class="px-6 py-3">Rp1.072.500</td>
@@ -498,13 +852,104 @@
               </tfoot>
             </table>
           </div>
-          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-3 text-sm font-medium mt-2">* Data Maret 2026 diambil dari rekap tagihan. Total listrik Maret: Rp17.353.060 (3 panel).</div>
+          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-3 text-sm font-medium mt-2">*
+            Data Maret 2026 diambil dari rekap tagihan. Total listrik Maret: Rp17.353.060 (3 panel).</div>
         </div>
       </section>
 
-      <!-- Slide 9: Tindak Lanjut -->
+      <!-- Slide 9: Personil -->
+      <section class="pres-slide" data-title="Personil Unit">
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">5
+          · Personil Unit</span>
+        <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Tim Kerja IT, Lab, dan Sarpras</h2>
+        <div class="max-w-6xl w-full">
+          <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm scale-[0.85] origin-top">
+            <table class="w-full text-xs text-left text-gray-700">
+              <thead class="text-primary uppercase bg-primary-soft">
+                <tr>
+                  <th class="px-3 py-2">NO</th>
+                  <th class="px-3 py-2">NAMA</th>
+                  <th class="px-3 py-2">JABATAN</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="px-3 py-1">1</td>
+                  <td class="px-3 py-1 font-bold">M. Hadi Wijaya, M.T.</td>
+                  <td class="px-3 py-1">Waka. Bidang IT, Lab, Sarpra</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">2</td>
+                  <td class="px-3 py-1 font-bold">Whyna Agustin, S.Pd.</td>
+                  <td class="px-3 py-1">Kaur IT</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">3</td>
+                  <td class="px-3 py-1 font-bold">M. Chusni Agus, M.Pd.</td>
+                  <td class="px-3 py-1">Kaur. Laboratorium</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">4</td>
+                  <td class="px-3 py-1 font-bold">Ekon Anjar P., S.Kom.</td>
+                  <td class="px-3 py-1">Kaur Sarpras</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">5</td>
+                  <td class="px-3 py-1 font-bold">Amalia R., S.Kom.</td>
+                  <td class="px-3 py-1">PIC. Administrasi</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">6</td>
+                  <td class="px-3 py-1 font-bold">Zainul Abidin, S.Kom.</td>
+                  <td class="px-3 py-1">PIC. IT Mobile</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">7</td>
+                  <td class="px-3 py-1 font-bold">Zakaria, S.Pd.</td>
+                  <td class="px-3 py-1">PIC. IT Backend</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">8</td>
+                  <td class="px-3 py-1 font-bold">Chandra W. K., S.Pd.</td>
+                  <td class="px-3 py-1">PIC. IT UI/UX</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">9</td>
+                  <td class="px-3 py-1 font-bold">M. Bagus A., M.Pd.</td>
+                  <td class="px-3 py-1">PIC. IT Support</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">10</td>
+                  <td class="px-3 py-1 font-bold">Nico R., S.ST.</td>
+                  <td class="px-3 py-1">PIC. IT Infra</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">11</td>
+                  <td class="px-3 py-1 font-bold">Firmansyah A., S.Kom.</td>
+                  <td class="px-3 py-1">PIC. Lab Riset</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">12</td>
+                  <td class="px-3 py-1 font-bold">Rudi Mistriono, S.Kom.</td>
+                  <td class="px-3 py-1">PIC. Dapodik/Inventaris</td>
+                </tr>
+                <tr>
+                  <td class="px-3 py-1">13</td>
+                  <td class="px-3 py-1 font-bold">Setdiyoko, S.E.</td>
+                  <td class="px-3 py-1">PIC. Sapra</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Tindak Lanjut -->
       <section class="pres-slide" data-title="Tindak Lanjut">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Tindak Lanjut</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Tindak
+          Lanjut</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Prioritas 30-60-90 Hari</h2>
         <ul class="list-disc pl-8 text-xl md:text-2xl space-y-4 text-gray-700 max-w-4xl">
           <li><strong>30 hari:</strong> Sosialisasi transisi platform dan penguatan kebijakan PDP internal.</li>
@@ -515,12 +960,18 @@
 
       <!-- Slide 10: Penutup -->
       <section class="pres-slide" data-title="Penutup">
-        <span class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Penutup</span>
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">Penutup</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Kolaborasi Menjadi Kunci</h2>
         <div class="max-w-4xl space-y-4">
-          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Tim IT, Laboratorium, dan Sarana Prasarana bergerak bersama untuk memastikan pembelajaran didukung infrastruktur yang relevan, aman, dan siap menghadapi kebutuhan industri.</p>
-          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Dukungan seluruh guru sangat penting dalam menjaga fasilitas, beradaptasi dengan platform yang sedang dikembangkan yayasan, serta membangun budaya pembelajaran yang inovatif dan berkelanjutan.</p>
-          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-6">Terima kasih. Ruang diskusi dan masukan dibuka setelah sesi ini.</div>
+          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Tim IT, Laboratorium, dan Sarana Prasarana
+            bergerak bersama untuk memastikan pembelajaran didukung infrastruktur yang relevan, aman, dan siap
+            menghadapi kebutuhan industri.</p>
+          <p class="text-xl md:text-2xl text-gray-700 m-0 leading-relaxed">Dukungan seluruh guru sangat penting dalam
+            menjaga fasilitas, beradaptasi dengan platform yang sedang dikembangkan yayasan, serta membangun budaya
+            pembelajaran yang inovatif dan berkelanjutan.</p>
+          <div class="border border-blue-200 bg-blue-50 text-blue-900 rounded-2xl px-5 py-4 font-semibold mt-6">Terima
+            kasih. Ruang diskusi dan masukan dibuka setelah sesi ini.</div>
         </div>
       </section>
     </main>
@@ -528,88 +979,93 @@
     <footer class="pres-footerbar grid grid-cols-[1fr_auto] items-center gap-3">
       <div class="pres-progress"><span id="presBar"></span></div>
       <div class="flex gap-2">
-        <button id="presPrev" type="button" class="border border-gray-300 bg-white text-gray-900 rounded-lg px-4 py-2 cursor-pointer font-bold hover:bg-gray-100 transition-colors">← Prev</button>
-        <button id="presNext" type="button" class="border border-primary bg-primary text-white rounded-lg px-4 py-2 cursor-pointer font-bold hover:bg-red-700 transition-colors">Next →</button>
+        <button id="presPrev" type="button"
+          class="border border-gray-300 bg-white text-gray-900 rounded-lg px-4 py-2 cursor-pointer font-bold hover:bg-gray-100 transition-colors">←
+          Prev</button>
+        <button id="presNext" type="button"
+          class="border border-primary bg-primary text-white rounded-lg px-4 py-2 cursor-pointer font-bold hover:bg-red-700 transition-colors">Next
+          →</button>
       </div>
-      <div class="text-xs text-gray-500 col-span-2 text-right">Panah kiri/kanan · Space · F fullscreen · Esc keluar · Ctrl/Cmd+P untuk PDF</div>
+      <div class="text-xs text-gray-500 col-span-2 text-right">Panah kiri/kanan · Space · F fullscreen · Esc keluar ·
+        Ctrl/Cmd+P untuk PDF</div>
     </footer>
   </div>
 
   <script>
-  (function () {
-    var slides = [];
-    var cur = 0;
-    var counter, bar, active = false;
+      (function () {
+        var slides = [];
+        var cur = 0;
+        var counter, bar, active = false;
 
-    function getSlides() {
-      return Array.prototype.slice.call(document.querySelectorAll('#presDeck .pres-slide'));
-    }
-
-    function render() {
-      slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
-      var title = slides[cur].getAttribute('data-title') || '';
-      if(counter) counter.textContent = 'Slide ' + (cur + 1) + '/' + slides.length + ' — ' + title;
-      if(bar) bar.style.width = (((cur + 1) / slides.length) * 100).toFixed(1) + '%';
-    }
-
-    window.startPresentasi = function () {
-      document.body.classList.add('pres-mode');
-      slides = getSlides();
-      counter = document.getElementById('presCounter');
-      bar = document.getElementById('presBar');
-      cur = 0;
-      active = true;
-      render();
-      window.scrollTo(0, 0);
-    };
-
-    window.exitPresentasi = function () {
-      document.body.classList.remove('pres-mode');
-      active = false;
-      if (document.fullscreenElement) document.exitFullscreen().catch(function(){});
-    };
-
-    document.getElementById('presNext')?.addEventListener('click', function () {
-      if (!active) return;
-      cur = Math.min(cur + 1, slides.length - 1);
-      render();
-    });
-
-    document.getElementById('presPrev')?.addEventListener('click', function () {
-      if (!active) return;
-      cur = Math.max(cur - 1, 0);
-      render();
-    });
-
-    window.addEventListener('keydown', function (e) {
-      if (!active) return;
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        cur = Math.min(cur + 1, slides.length - 1);
-        render();
-      }
-      if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        cur = Math.max(cur - 1, 0);
-        render();
-      }
-      if (e.key === 'Escape') {
-        exitPresentasi();
-      }
-      if (e.key === 'f' || e.key === 'F') {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(function(){});
-        } else {
-          document.exitFullscreen().catch(function(){});
+        function getSlides() {
+          return Array.prototype.slice.call(document.querySelectorAll('#presDeck .pres-slide'));
         }
-      }
-    });
-  })();
+
+        function render() {
+          slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+          var title = slides[cur].getAttribute('data-title') || '';
+          if (counter) counter.textContent = 'Slide ' + (cur + 1) + '/' + slides.length + ' — ' + title;
+          if (bar) bar.style.width = (((cur + 1) / slides.length) * 100).toFixed(1) + '%';
+        }
+
+        window.startPresentasi = function () {
+          document.body.classList.add('pres-mode');
+          slides = getSlides();
+          counter = document.getElementById('presCounter');
+          bar = document.getElementById('presBar');
+          cur = 0;
+          active = true;
+          render();
+          window.scrollTo(0, 0);
+        };
+
+        window.exitPresentasi = function () {
+          document.body.classList.remove('pres-mode');
+          active = false;
+          if (document.fullscreenElement) document.exitFullscreen().catch(function () { });
+        };
+
+        document.getElementById('presNext')?.addEventListener('click', function () {
+          if (!active) return;
+          cur = Math.min(cur + 1, slides.length - 1);
+          render();
+        });
+
+        document.getElementById('presPrev')?.addEventListener('click', function () {
+          if (!active) return;
+          cur = Math.max(cur - 1, 0);
+          render();
+        });
+
+        window.addEventListener('keydown', function (e) {
+          if (!active) return;
+          if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+            e.preventDefault();
+            cur = Math.min(cur + 1, slides.length - 1);
+            render();
+          }
+          if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            e.preventDefault();
+            cur = Math.max(cur - 1, 0);
+            render();
+          }
+          if (e.key === 'Escape') {
+            exitPresentasi();
+          }
+          if (e.key === 'f' || e.key === 'F') {
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen().catch(function () { });
+            } else {
+              document.exitFullscreen().catch(function () { });
+            }
+          }
+        });
+      })();
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Billing data from table
       const billingLabels = ['Yayasan Sandykara', 'SMK Telkom', 'Kantin SMK Telkom', 'PDAM Yys Sandhikara'];
       const jan = [4592250, 7814800, 2126160, 1041000];
@@ -621,27 +1077,42 @@
       if (canvas) {
         const ctx = canvas.getContext('2d');
         new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: billingLabels,
             datasets: [
               {
                 label: 'Jan 2026',
                 data: jan,
+                borderColor: colors[0],
                 backgroundColor: colors[0],
-                borderRadius: 4,
+                borderWidth: 3,
+                tension: 0.3,
+                fill: false,
+                pointRadius: 5,
+                pointHoverRadius: 8
               },
               {
                 label: 'Feb 2026',
                 data: feb,
+                borderColor: colors[1],
                 backgroundColor: colors[1],
-                borderRadius: 4,
+                borderWidth: 3,
+                tension: 0.3,
+                fill: false,
+                pointRadius: 5,
+                pointHoverRadius: 8
               },
               {
                 label: 'Mar 2026',
                 data: mar,
+                borderColor: colors[2],
                 backgroundColor: colors[2],
-                borderRadius: 4,
+                borderWidth: 3,
+                tension: 0.3,
+                fill: false,
+                pointRadius: 5,
+                pointHoverRadius: 8
               }
             ]
           },
@@ -655,7 +1126,7 @@
               },
               tooltip: {
                 callbacks: {
-                  label: function(context) {
+                  label: function (context) {
                     let label = context.dataset.label || '';
                     if (label) {
                       label += ': ';
@@ -672,7 +1143,7 @@
               y: {
                 beginAtZero: true,
                 ticks: {
-                  callback: function(value) {
+                  callback: function (value) {
                     if (value >= 1000000) {
                       return 'Rp' + (value / 1000000) + 'jt';
                     }
@@ -697,4 +1168,5 @@
     });
   </script>
 </body>
+
 </html>
