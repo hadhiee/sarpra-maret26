@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model Presentasi - IT, Laboratorium, dan Sarpras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #b91c1c;
+      --primary-dark: #7f1d1d;
+      --primary-soft: #fee2e2;
+      --accent: #1d4ed8;
+      --soft: #fee2e2;
+      --soft-blue: #eff6ff;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 16%, #ffe8e8 0%, transparent 28%),
+        radial-gradient(circle at 92% 20%, #e8efff 0%, transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      overflow: hidden;
+    }
+
+    .stage {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      gap: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(135deg, #991b1b, #dc2626);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #ffffff;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    .meta {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .deck {
+      position: relative;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, #ffffff 0%, #fcfcfd 100%);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(20px, 4vw, 56px);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: clamp(10px, 2.3vw, 20px);
+      opacity: 0;
+      transform: translateX(40px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .chip {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid #fecaca;
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+    }
+
+    h1 { font-size: clamp(30px, 5vw, 56px); }
+    h2 { font-size: clamp(24px, 4vw, 42px); }
+
+    .subtitle {
+      font-size: clamp(16px, 2.1vw, 22px);
+      color: #374151;
+      max-width: 920px;
+      margin: 0;
+    }
+
+    .content {
+      align-self: start;
+      display: grid;
+      gap: 14px;
+      max-width: 980px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      color: var(--primary-dark);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: clamp(16px, 2vw, 22px);
+      max-width: 980px;
+    }
+
+    .list li + li { margin-top: 10px; }
+
+    .focus {
+      border: 1px solid #dbeafe;
+      background: var(--soft-blue);
+      color: #1e3a8a;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-weight: 600;
+      max-width: 980px;
+    }
+
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 980px;
+    }
+
+    .kpi-item {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-item .num {
+      color: var(--primary);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .kpi-item .label {
+      color: #4b5563;
+      font-size: 14px;
+    }
+
+    .footerbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+      transition: width 280ms ease;
+    }
+
+    .controls {
+      display: inline-flex;
+      gap: 8px;
+    }
+
+    button {
+      font: inherit;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    button.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    @media print {
+      body {
+        overflow: visible;
+        background: #ffffff;
+      }
+
+      .stage {
+        display: block;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .topbar,
+      .footerbar {
+        display: none;
+      }
+
+      .deck {
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background: #ffffff;
+      }
+
+      .slide {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        min-height: 100vh;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .cards,
+      .kpi {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        border-radius: 18px;
+      }
+
+      .meta {
+        display: none;
+      }
+
+      .stage {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <header class="topbar">
+      <div class="brand">MODEL PRESENTASI RAPAT BULANAN</div>
+      <div class="meta" id="counter">Slide 1/10</div>
+    </header>
+
+    <main class="deck" id="deck">
+      <section class="slide active" data-title="Pembuka">
+        <span class="chip">Maret 2026 - SMK Telkom Malang</span>
+        <h1>Rangkuman Bidang IT, Laboratorium, dan Sarana Prasarana</h1>
+        <div class="content">
+          <p class="subtitle">
+            Arah penguatan ekosistem digital, pengembangan laboratorium, perlindungan karya inovasi,
+            serta pembaruan sarana prasarana untuk mendukung pembelajaran yang aman dan berkelanjutan.
+          </p>
+          <div class="focus">Gunakan panah kiri/kanan atau tombol Next/Prev untuk berpindah slide.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Agenda">
+        <span class="chip">Agenda</span>
+        <h2>Alur Presentasi</h2>
+        <ul class="list">
+          <li>Bidang IT: platform digital, meeting, fasilitas, dan awareness PDP.</li>
+          <li>Bidang Laboratorium: entrepreneur siswa dan capaian HKI.</li>
+          <li>Bidang Sarpras: usulan CAPEX dan status evaluasi.</li>
+          <li>Informasi utilitas gedung: listrik, air, dan budaya efisiensi.</li>
+          <li>Penutup: fokus tindak lanjut kolaboratif.</li>
+        </ul>
+      </section>
+
+      <section class="slide" data-title="Bidang IT">
+        <span class="chip">1. Bidang IT</span>
+        <h2>Penguatan Platform, Perangkat, dan Tata Kelola Data</h2>
+        <div class="content cards">
+          <article class="card">
+            <h3>Platform Digital</h3>
+            <p>Ekosistem yayasan diarahkan ke Microsoft 365 untuk kolaborasi yang lebih terpusat.</p>
+          </article>
+          <article class="card">
+            <h3>Platform Meeting</h3>
+            <p>Transisi bertahap dari Zoom ke Microsoft Teams untuk meeting dan koordinasi internal.</p>
+          </article>
+          <article class="card">
+            <h3>Fasilitas IT</h3>
+            <p>Kompulir software dan alat praktik untuk mendukung praktikum dan teaching factory.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="PDP">
+        <span class="chip">Poin Kritis</span>
+        <h2>Awareness Perlindungan Data Pribadi (PDP)</h2>
+        <ul class="list">
+          <li>Data siswa seperti NIK, alamat, nomor HP, data orang tua, dan data akademik harus dijaga ketat.</li>
+          <li>Pembagian data hanya untuk kebutuhan kerja yang jelas dan dapat dipertanggungjawabkan.</li>
+          <li>Gunakan akun resmi sekolah dan alur komunikasi resmi untuk menekan risiko kebocoran data.</li>
+        </ul>
+        <div class="focus">Target: budaya sadar data di semua unit kerja, bukan hanya tim IT.</div>
+      </section>
+
+      <section class="slide" data-title="Laboratorium">
+        <span class="chip">2. Bidang Laboratorium</span>
+        <h2>Wadah Inovasi dan Entrepreneur Siswa</h2>
+        <ul class="list">
+          <li>Pengembangan wadah entrepreneur siswa non-IT di bawah koordinasi Kaur Lab.</li>
+          <li>Selaras dengan program BMW: Bekerja, Melanjutkan, dan Wirausaha.</li>
+          <li>Fokus utama: karya siswa naik kelas menjadi produk, portofolio, atau rintisan usaha.</li>
+        </ul>
+      </section>
+
+      <section class="slide" data-title="HKI">
+        <span class="chip">Capaian HKI</span>
+        <h2>Program Komputer yang Sudah Tercatat/Diajukan</h2>
+        <div class="content cards">
+          <article class="card"><h3>MoLeCuL</h3><p>Moklet Learning Culture</p></article>
+          <article class="card"><h3>Mexpo</h3><p>Platform eksibisi karya dan kegiatan.</p></article>
+          <article class="card"><h3>myedotel.id</h3><p>Inisiatif layanan dan sistem digital sekolah.</p></article>
+          <article class="card"><h3>Telkom Society</h3><p>Ekosistem komunitas dan kolaborasi.</p></article>
+          <article class="card"><h3>Portofolio Siswa</h3><p>Dokumentasi kompetensi dan rekam karya.</p></article>
+          <article class="card"><h3>Moklet App</h3><p>Aplikasi pendukung proses pembelajaran.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Sarpras">
+        <span class="chip">3. Bidang Sarpras</span>
+        <h2>Update Usulan CAPEX 2026</h2>
+        <ul class="list">
+          <li>Pembangunan/pengembangan MTP.</li>
+          <li>Peremajaan keramik beberapa kelas dan perbaikan talang serta dak beton.</li>
+          <li>Perbaikan dak/atap masjid serta ruang pendukung teaching factory di Lab 3.</li>
+          <li>Rencana pengembangan lantai 3 Gedung Selatan.</li>
+        </ul>
+        <div class="focus">Status saat ini: usulan sudah diajukan ke yayasan dan berada pada tahap evaluasi prioritas.</div>
+      </section>
+
+      <section class="slide" data-title="Utilitas">
+        <span class="chip">4. Utilitas Gedung</span>
+        <h2>Monitoring Biaya Operasional dan Efisiensi</h2>
+        <div class="kpi">
+          <div class="kpi-item">
+            <div class="num">3</div>
+            <div class="label">Panel listrik utama untuk operasional sekolah.</div>
+          </div>
+          <div class="kpi-item">
+            <div class="num">Rp17.353.060</div>
+            <div class="label">Estimasi total tagihan listrik sekitar Maret 2026.</div>
+          </div>
+          <div class="kpi-item">
+            <div class="num">PDAM</div>
+            <div class="label">Penggunaan air dipantau untuk efisiensi berkelanjutan.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Tindak Lanjut">
+        <span class="chip">Tindak Lanjut</span>
+        <h2>Prioritas 30-60-90 Hari</h2>
+        <ul class="list">
+          <li>30 hari: sosialisasi transisi platform dan penguatan kebijakan PDP internal.</li>
+          <li>60 hari: pemetaan kebutuhan sarpras prioritas dan rencana pelaksanaan bertahap.</li>
+          <li>90 hari: review dampak program laboratorium, HKI, dan efisiensi utilitas.</li>
+        </ul>
+      </section>
+
+      <section class="slide" data-title="Penutup">
+        <span class="chip">Penutup</span>
+        <h2>Kolaborasi Menjadi Kunci</h2>
+        <div class="content">
+          <p class="subtitle">
+            Tim IT, Laboratorium, dan Sarpras bergerak bersama untuk memastikan pembelajaran didukung
+            infrastruktur yang relevan, aman, dan siap menghadapi kebutuhan industri.
+          </p>
+          <div class="focus">Terima kasih. Ruang diskusi dan masukan dibuka setelah sesi ini.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footerbar">
+      <div class="progress" aria-label="progress slide"><span id="bar"></span></div>
+      <div class="controls">
+        <button id="prev" type="button">Prev</button>
+        <button id="next" type="button" class="primary">Next</button>
+      </div>
+      <div class="hint">Panah kiri/kanan | Space | F fullscreen | Ctrl/Cmd+P untuk PDF</div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var current = 0;
+      var counter = document.getElementById('counter');
+      var bar = document.getElementById('bar');
+      var prevBtn = document.getElementById('prev');
+      var nextBtn = document.getElementById('next');
+
+      function render() {
+        slides.forEach(function (slide, idx) {
+          slide.classList.toggle('active', idx === current);
+        });
+
+        var total = slides.length;
+        var title = slides[current].getAttribute('data-title') || '';
+        counter.textContent = 'Slide ' + (current + 1) + '/' + total + ' - ' + title;
+        bar.style.width = (((current + 1) / total) * 100).toFixed(2) + '%';
+      }
+
+      function next() {
+        current = Math.min(current + 1, slides.length - 1);
+        render();
+      }
+
+      function prev() {
+        current = Math.max(current - 1, 0);
+        render();
+      }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      window.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+          event.preventDefault();
+          next();
+        }
+        if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+          event.preventDefault();
+          prev();
+        }
+        if (event.key === 'f' || event.key === 'F') {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(function () {});
+          } else {
+            document.exitFullscreen().catch(function () {});
+          }
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
