@@ -304,6 +304,34 @@
       .number-box { padding: 12px 8px; }
       .badge { min-width: 32px; height: 32px; font-size: 16px; }
     }
+
+    /* Table styles (fix block) */
+    table {
+      border-radius: var(--radius-table);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    th, td {
+      border: none;
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+    thead tr {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3f4f6;
+      transition: background var(--transition);
+    }
+    tfoot tr {
+      background: #f3f4f6;
+      font-weight: 700;
+    }
           border-radius: var(--radius-table);
           overflow: hidden;
           box-shadow: var(--shadow);
