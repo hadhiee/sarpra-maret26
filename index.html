@@ -6,39 +6,49 @@
   <title>Rangkuman Bidang IT, Laboratorium, dan Sarpras</title>
   <style>
     :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
+      --bg: #f7fafc;
+      --card: #fff;
+      --text: #22223b;
       --muted: #6b7280;
       --primary: #b91c1c;
       --primary-soft: #fee2e2;
       --line: #e5e7eb;
-      --accent: #1d4ed8;
-      --good: #065f46;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 22px;
+      --accent: #2563eb;
+      --good: #10b981;
+      --shadow: 0 8px 24px rgba(0,0,0,.10);
+      --radius: 18px;
+      --radius-card: 24px;
+      --radius-table: 12px;
+      --transition: 0.25s;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
       background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 16px;
+      letter-spacing: 0.01em;
+    }
     }
 
     .hero {
       background: linear-gradient(135deg, #991b1b, #dc2626);
       color: white;
-      padding: 48px 20px 36px;
+      padding: 56px 24px 40px;
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
     }
 
     .hero-inner,
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 18px;
     }
 
     .eyebrow {
@@ -105,26 +115,31 @@
     }
 
     .section {
-      padding: 28px 20px;
+      padding: 36px 24px;
+      margin-bottom: 32px;
+      background: var(--card);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow);
     }
 
     .section-title {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .badge {
-      min-width: 42px;
-      height: 42px;
+      min-width: 48px;
+      height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 14px;
+      border-radius: 16px;
       background: var(--primary-soft);
       color: var(--primary);
       font-weight: bold;
+      font-size: 20px;
     }
 
     .section-title h2 {
@@ -139,70 +154,81 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
     }
 
     .card {
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px;
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
       box-shadow: var(--shadow);
+      transition: box-shadow var(--transition);
+      margin-bottom: 0;
+    }
+    .card:hover {
+      box-shadow: 0 16px 32px rgba(0,0,0,.13);
+    }
     }
 
     .card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
+      margin: 0 0 14px;
+      font-size: 22px;
+      font-weight: 600;
     }
 
     .card p {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       color: var(--muted);
+      font-size: 15px;
     }
 
     ul {
       margin: 0;
-      padding-left: 20px;
+      padding-left: 22px;
+      font-size: 16px;
     }
 
     li + li { margin-top: 8px; }
 
     .highlight {
-      background: #eff6ff;
+      background: #f0f4ff;
       border: 1px solid #dbeafe;
       color: #1e3a8a;
-      padding: 18px 20px;
-      border-radius: 18px;
-      margin-top: 16px;
+      padding: 22px 24px;
+      border-radius: var(--radius);
+      margin-top: 22px;
+      font-size: 16px;
     }
 
     .numbers {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-top: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 24px;
     }
 
     .number-box {
-      background: white;
+      background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 20px;
+      border-radius: var(--radius);
+      padding: 24px 20px;
       box-shadow: var(--shadow);
+      font-size: 16px;
     }
 
     .number-box .num {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 700;
       color: var(--primary);
       line-height: 1.1;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .number-box .label {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .hki-list {
@@ -234,32 +260,75 @@
     .footer {
       text-align: center;
       color: var(--muted);
-      font-size: 14px;
-      padding: 20px;
+      font-size: 15px;
+      padding: 24px;
+      background: var(--card);
+      border-radius: var(--radius-card);
+      margin: 32px 18px 0 18px;
+      box-shadow: var(--shadow);
     }
 
     .top-link {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      right: 22px;
+      bottom: 22px;
       background: var(--primary);
       color: white;
       text-decoration: none;
-      width: 46px;
-      height: 46px;
+      width: 52px;
+      height: 52px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       box-shadow: var(--shadow);
-      font-size: 20px;
+      font-size: 22px;
+      transition: background var(--transition);
+    }
+    .top-link:hover {
+      background: #dc2626;
+    }
     }
 
     @media (max-width: 700px) {
-      .hero { padding-top: 34px; }
-      .card { padding: 18px; }
-      .section { padding: 22px 16px; }
-      .section-title h2 { font-size: 24px; }
+      .hero { padding-top: 24px; }
+      .card { padding: 16px; }
+      .section { padding: 16px 8px; }
+      .section-title h2 { font-size: 20px; }
+      .container { padding: 0 6px; }
+      .footer { padding: 12px; margin: 18px 6px 0 6px; }
+      .top-link { width: 40px; height: 40px; font-size: 16px; right: 8px; bottom: 8px; }
+      .grid { grid-template-columns: 1fr; gap: 12px; }
+      .numbers { grid-template-columns: 1fr; gap: 12px; }
+      .highlight { padding: 12px 8px; }
+      .number-box { padding: 12px 8px; }
+      .badge { min-width: 32px; height: 32px; font-size: 16px; }
+    }
+          border-radius: var(--radius-table);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+          margin-bottom: 18px;
+        }
+        th, td {
+          border: none;
+          padding: 12px 14px;
+          font-size: 15px;
+        }
+        thead tr {
+          background: var(--primary-soft);
+          color: var(--primary);
+        }
+        tbody tr:nth-child(even) {
+          background: #f9fafb;
+        }
+        tbody tr:hover {
+          background: #f3f4f6;
+          transition: background var(--transition);
+        }
+        tfoot tr {
+          background: #f3f4f6;
+          font-weight: 700;
+        }
     }
 
     /* ===== PRESENTATION MODE ===== */
