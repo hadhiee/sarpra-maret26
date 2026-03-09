@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rangkuman Bidang IT, Laboratorium, dan Sarpras</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #b91c1c;
+      --primary-soft: #fee2e2;
+      --line: #e5e7eb;
+      --accent: #1d4ed8;
+      --good: #065f46;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #991b1b, #dc2626);
+      color: white;
+      padding: 48px 20px 36px;
+    }
+
+    .hero-inner,
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      max-width: 820px;
+      font-size: 18px;
+      opacity: .95;
+      margin: 0;
+    }
+
+    .quick-nav {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 28px 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      min-width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .section-title p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .highlight {
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #1e3a8a;
+      padding: 18px 20px;
+      border-radius: 18px;
+      margin-top: 16px;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .number-box {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .number-box .num {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .number-box .label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hki-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      background: #f9fafb;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-weight: 600;
+    }
+
+    .closing {
+      background: linear-gradient(135deg, #111827, #374151);
+      color: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .closing h2 { margin-top: 0; }
+    .closing p { opacity: .95; }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    .top-link {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+      font-size: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .hero { padding-top: 34px; }
+      .card { padding: 18px; }
+      .section { padding: 22px 16px; }
+      .section-title h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Rapat Bulanan Maret 2026 • SMK Telkom Malang</div>
+      <h1>Rangkuman Bidang IT, Laboratorium, dan Sarana Prasarana</h1>
+      <p class="subtitle">
+        Arah penguatan ekosistem digital, pengembangan laboratorium, perlindungan karya inovasi, serta pembaruan sarana prasarana untuk mendukung pembelajaran yang aman, relevan, dan berkelanjutan.
+      </p>
+      <nav class="quick-nav">
+        <a href="#it">IT</a>
+        <a href="#lab">Laboratorium</a>
+        <a href="#sarpras">Sarpras</a>
+        <a href="#utilitas">Utilitas</a>
+        <a href="#penutup">Penutup</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section" id="it">
+      <div class="section-title">
+        <div class="badge">1</div>
+        <div>
+          <h2>Bidang IT</h2>
+          <p>Penguatan platform, perangkat pembelajaran, dan keamanan data.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Arah Platform Digital Yayasan</h3>
+          <ul>
+            <li>Yayasan saat ini mulai mengarahkan penggunaan <strong>Microsoft 365</strong> sebagai platform utama kolaborasi.</li>
+            <li>Beberapa aktivitas yang sebelumnya menggunakan <strong>Google Workspace for Education</strong> akan mulai diselaraskan ke ekosistem Microsoft.</li>
+            <li>Tujuannya adalah integrasi akun, dokumen, komunikasi, dan pengelolaan akses yang lebih terpusat.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Perubahan Platform Meeting</h3>
+          <ul>
+            <li>Penggunaan <strong>Zoom</strong> secara bertahap akan beralih ke <strong>Microsoft Teams</strong>.</li>
+            <li>Teams diharapkan menjadi ruang meeting, komunikasi internal, dan kolaborasi kerja.</li>
+            <li>Tim IT akan mendampingi proses adaptasi agar transisi berjalan lebih lancar.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Penguatan Fasilitas IT</h3>
+          <ul>
+            <li>Kebutuhan <strong>software</strong> dan <strong>alat praktik</strong> laboratorium saat ini sedang dikompulir oleh yayasan.</li>
+            <li>Langkah ini diarahkan untuk mendukung pembelajaran berbasis proyek, praktikum, dan Teaching Factory.</li>
+            <li>Sekolah terus menyesuaikan kebutuhan perangkat dengan perkembangan pembelajaran dan industri.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="highlight">
+        <strong>Awareness PDP:</strong> perlindungan data pribadi siswa perlu terus dikuatkan. Data seperti NIK, alamat, nomor HP, data orang tua, dan data akademik harus dikelola dengan hati-hati, tidak dibagikan tanpa kebutuhan yang jelas, dan diupayakan menggunakan akun resmi sekolah.
+      </div>
+    </section>
+
+    <section class="section" id="lab">
+      <div class="section-title">
+        <div class="badge">2</div>
+        <div>
+          <h2>Bidang Laboratorium</h2>
+          <p>Pengembangan wadah kewirausahaan siswa dan penguatan budaya inovasi.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Wadah Entrepreneur Siswa</h3>
+          <ul>
+            <li>Tim laboratorium di bawah koordinasi <strong>Kaur Lab</strong> sedang menyusun wadah bagi siswa entrepreneur, khususnya pada bidang <strong>non-IT</strong>.</li>
+            <li>Program ini diarahkan untuk mendukung program sekolah <strong>BMW: Bekerja, Melanjutkan, dan Wirausaha</strong>.</li>
+            <li>Harapannya, karya siswa tidak berhenti sebagai tugas, tetapi berkembang menjadi produk atau usaha yang bernilai.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>HKI Program Komputer</h3>
+          <p>Beberapa hasil kerja tim telah meloloskan pencatatan atau pengajuan HKI kategori program komputer.</p>
+          <div class="hki-list">
+            <div class="pill">MoLeCuL – Moklet Learning Culture</div>
+            <div class="pill">Mexpo</div>
+            <div class="pill">myedotel.id</div>
+            <div class="pill">Telkom Society</div>
+            <div class="pill">Portofolio Siswa</div>
+            <div class="pill">Moklet App</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="highlight">
+        <strong>Makna strategis:</strong> laboratorium tidak hanya menjadi tempat praktik, tetapi juga ruang lahirnya inovasi, portofolio, kewirausahaan, dan karya yang memiliki perlindungan hukum melalui HKI.
+      </div>
+    </section>
+
+    <section class="section" id="sarpras">
+      <div class="section-title">
+        <div class="badge">3</div>
+        <div>
+          <h2>Bidang Sarana Prasarana</h2>
+          <p>Update kebutuhan prioritas yang telah diusulkan melalui program CAPEX.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Usulan Kebutuhan CAPEX</h3>
+          <ul>
+            <li>Pembangunan atau pengembangan <strong>MTP</strong>.</li>
+            <li>Perbaikan lantai atau peremajaan keramik beberapa ruang kelas.</li>
+            <li>Perbaikan talang dan dak beton gedung existing.</li>
+            <li>Perbaikan dak atau atap Masjid.</li>
+            <li>Pembuatan ruang pendukung <strong>Teaching Factory</strong> di <strong>Lab 3</strong>.</li>
+            <li>Rencana pengembangan <strong>lantai 3 Gedung Selatan</strong>.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Status Saat Ini</h3>
+          <ul>
+            <li>Beberapa kebutuhan tersebut sudah diajukan ke yayasan sebagai bagian dari justifikasi kebutuhan CAPEX 2026.</li>
+            <li>Saat ini masih dalam proses evaluasi dan tindak lanjut sesuai prioritas program.</li>
+            <li>Informasi lanjutan akan disampaikan kembali ketika ada perkembangan persetujuan dan pelaksanaan.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="utilitas">
+      <div class="section-title">
+        <div class="badge">4</div>
+        <div>
+          <h2>Informasi Utilitas Gedung</h2>
+          <p>Monitoring biaya operasional listrik dan air sebagai bagian dari efisiensi sekolah.</p>
+        </div>
+      </div>
+
+      <div class="numbers">
+        <div class="number-box">
+          <div class="num">3</div>
+          <div class="label">Panel listrik utama yang digunakan untuk operasional</div>
+        </div>
+        <div class="number-box">
+          <div class="num">Rp17.353.060</div>
+          <div class="label">Total tagihan listrik sekitar bulan Maret 2026</div>
+        </div>
+        <div class="number-box">
+          <div class="num">PDAM</div>
+          <div class="label">Penggunaan air juga terus dimonitor agar tetap efisien</div>
+        </div>
+      </div>
+
+      <div class="highlight">
+        Efisiensi utilitas memerlukan dukungan bersama, terutama dalam kebiasaan mematikan lampu, AC, dan perangkat setelah digunakan serta menjaga penggunaan air secara bijak.
+      </div>
+    </section>
+
+    <section class="section" id="penutup">
+      <div class="closing">
+        <h2>Penutup</h2>
+        <p>
+          Tim IT, Laboratorium, dan Sarana Prasarana terus berupaya mendukung proses pembelajaran melalui penguatan infrastruktur, pengembangan ekosistem digital, penyediaan ruang inovasi, serta peningkatan kualitas fasilitas sekolah.
+        </p>
+        <p>
+          Dukungan seluruh guru sangat penting dalam menjaga fasilitas, beradaptasi dengan platform yang sedang dikembangkan yayasan, serta membangun budaya pembelajaran yang aman, inovatif, dan berkelanjutan.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Disusun untuk kebutuhan rapat bulanan • SMK Telkom Malang • Maret 2026
+  </footer>
+
+  <a class="top-link" href="#top" aria-label="Kembali ke atas">↑</a>
+</body>
+</html>
