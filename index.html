@@ -754,6 +754,9 @@
             </tbody>
           </table>
         </div>
+        <div style="margin-top:32px;text-align:center">
+          <canvas id="billingChart" height="320"></canvas>
+        </div>
       </div>
     </section>
 
@@ -1039,5 +1042,67 @@
     });
   })();
   </script>
-</body>
+
+  <script>
+      // Billing data from table
+      const billingLabels = ['Yayasan Sandykara', 'SMK Telkom', 'Kantin SMK Telkom', 'PDAM Yys Sandhikara'];
+      const jan = [4592250, 7814800, 2126160, 1041000];
+      const feb = [6556510, 11782720, 5994190, 792500];
+      const mar = [4631850, 7814800, 3833910, 1072500];
+      const colors = ['#991b1b', '#2563eb', '#10b981', '#f59e42'];
+
+      const ctx = document.getElementById('billingChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: billingLabels,
+          datasets: [
+            {
+              label: 'Jan 2026',
+              data: jan,
+              backgroundColor: colors[0],
+            },
+            {
+              label: 'Feb 2026',
+              data: feb,
+              backgroundColor: colors[1],
+            },
+            {
+              label: 'Mar 2026',
+              data: mar,
+              backgroundColor: colors[2],
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { font: { size: 15 } }
+            },
+            title: {
+              display: true,
+              text: 'Grafik Perbandingan Tagihan PLN & PDAM (Jan-Mar 2026)',
+              font: { size: 18 }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return 'Rp' + value.toLocaleString('id-ID');
+                },
+                font: { size: 14 }
+              }
+            },
+            x: {
+              ticks: { font: { size: 14 } }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
