@@ -138,6 +138,22 @@
       transition: width 280ms ease;
     }
 
+    @keyframes bounce-x {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(5px);
+      }
+    }
+
+    .animate-bounce-x {
+      animation: bounce-x 1s infinite;
+    }
+
     @media print {
       body.pres-mode {
         overflow: visible;
@@ -192,6 +208,9 @@
           class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Laboratorium</a>
         <a href="#sarpras"
           class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Sarpras</a>
+        <a href="#probis"
+          class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Proses
+          Bisnis</a>
         <a href="#utilitas"
           class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Utilitas</a>
         <a href="#personnel"
@@ -199,14 +218,19 @@
         <a href="#penutup"
           class="text-white no-underline px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm hover:bg-white/20 transition-colors">Penutup</a>
       </nav>
-      <div class="mt-4">
-        <a href="#" onclick="startPresentasi(); return false;"
-          class="inline-flex items-center gap-2 text-primary bg-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:bg-red-50 transition-colors">
-          Buka Mode Presentasi <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+      <div class="mt-6">
+        <button onclick="startPresentasi();"
+          class="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-white text-primary rounded-full font-extrabold text-sm shadow-2xl hover:bg-primary-soft hover:text-red-800 transition-all duration-300 transform hover:-translate-y-1 active:scale-95 overflow-hidden">
+          <span
+            class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+          <span class="relative flex items-center gap-2">
+            Buka Mode Presentasi
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-bounce-x" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
   </header>
@@ -356,31 +380,40 @@
 
       <!-- Images Grid -->
       <div class="bg-card border border-gray-200 rounded-2xl p-6 md:p-8 mt-6 text-center shadow-sm">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div class="flex flex-col h-full">
-            <h3 class="text-xl font-semibold mb-4 text-gray-900">Gedung MTP (Malang Techno Park)</h3>
-            <img src="mtp.png" alt="Gedung MTP SMK Telkom Malang"
-              class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
-            <p class="text-gray-500 text-sm mt-2 mb-4">Gedung MTP merupakan pusat pengembangan inovasi, Teaching
-              Factory, dan kolaborasi industri di SMK Telkom Malang.</p>
-            <a href="https://studio.tripo3d.ai/3d-model/0978e235-db57-474f-9d61-c999b6ed9067?invite_code=NYGP33"
-              target="_blank" rel="noopener"
-              class="inline-block px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-colors shadow-md mx-auto w-max mt-auto">Lihat
-              3D Gedung MTP ↗</a>
-          </div>
-          <div class="flex flex-col h-full">
-            <h3 class="text-xl font-semibold mb-4 text-gray-900">Proses Bisnis Unit Sarpras</h3>
-            <img src="probis.png" alt="Proses Bisnis Unit Sarpras SMK Telkom Malang"
-              class="max-w-full rounded-2xl shadow-md mb-4 object-cover flex-grow" />
-            <p class="text-gray-500 text-sm mt-2">Diagram proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom
-              Malang.</p>
-          </div>
+        <div class="flex flex-col items-center">
+          <h3 class="text-xl font-semibold mb-4 text-gray-900">Gedung MTP (Malang Techno Park)</h3>
+          <img src="mtp.png" alt="Gedung MTP SMK Telkom Malang"
+            class="max-w-full md:max-w-2xl rounded-2xl shadow-md mb-4 object-cover" />
+          <p class="text-gray-500 text-sm mt-2 mb-4 max-w-xl">Gedung MTP merupakan pusat pengembangan inovasi, Teaching
+            Factory,
+            dan kolaborasi industri di SMK Telkom Malang.</p>
+          <a href="https://studio.tripo3d.ai/3d-model/0978e235-db57-474f-9d61-c999b6ed9067?invite_code=NYGP33"
+            target="_blank" rel="noopener"
+            class="inline-block px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-colors shadow-md mx-auto w-max mt-auto">Lihat
+            3D Gedung MTP ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Process Section -->
+    <section class="bg-card p-6 md:p-9 rounded-3xl shadow-lg mb-8" id="probis">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
+          4</div>
+        <div>
+          <h2 class="text-2xl font-bold m-0 text-gray-900">Proses Bisnis Unit Sarpras</h2>
+          <p class="text-muted m-0 mt-1">Diagram alur kerja unit Sarpras, IT, dan Laboratorium.</p>
         </div>
       </div>
 
-      <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6">
-        <strong>Awareness:</strong> proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom Malang harus dipahami
-        oleh semua pihak agar dapat berjalan dengan efisien dan terstruktur.
+      <div class="bg-card border border-gray-200 rounded-2xl p-6 md:p-8 text-center shadow-sm overflow-hidden">
+        <img src="probis.png" alt="Proses Bisnis Unit Sarpras SMK Telkom Malang"
+          class="max-w-full mx-auto rounded-2xl shadow-md mb-4 object-contain hover:scale-105 transition-transform duration-500" />
+        <div class="bg-blue-50 border border-blue-200 text-blue-900 p-5 rounded-2xl mt-6 text-left">
+          <strong>Awareness:</strong> proses bisnis unit Sarpras, IT, dan Laboratorium SMK Telkom Malang harus dipahami
+          oleh semua pihak agar dapat berjalan dengan efisien dan terstruktur.
+        </div>
       </div>
     </section>
 
@@ -389,7 +422,7 @@
       <div class="flex items-center gap-4 mb-6">
         <div
           class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
-          4</div>
+          5</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Informasi Utilitas Gedung</h2>
           <p class="text-muted m-0 mt-1">Monitoring biaya operasional listrik dan air sebagai bagian dari efisiensi
@@ -487,7 +520,7 @@
       <div class="flex items-center gap-4 mb-6">
         <div
           class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-soft text-primary font-bold text-xl shrink-0">
-          5</div>
+          6</div>
         <div>
           <h2 class="text-2xl font-bold m-0 text-gray-900">Personil Unit IT, Lab, dan Sarpras</h2>
           <p class="text-muted m-0 mt-1">Struktur organisasi dan penanggung jawab bidang.</p>
@@ -624,7 +657,7 @@
     <header
       class="pres-topbar flex items-center justify-between gap-3 bg-gradient-to-br from-[#991b1b] to-[#dc2626] rounded-full px-5 py-2.5 text-white">
       <div class="font-bold text-sm tracking-wide">MODE PRESENTASI — RAPAT BULANAN</div>
-      <div class="text-sm opacity-90 hidden md:block" id="presCounter">Slide 1/12</div>
+      <div class="text-sm opacity-90 hidden md:block" id="presCounter">Slide 1/13</div>
       <button
         class="bg-white/20 border border-white/30 text-white px-4 py-1.5 rounded-full cursor-pointer text-sm font-bold hover:bg-white/30 transition-colors"
         onclick="exitPresentasi()">✕ Keluar</button>
@@ -771,10 +804,24 @@
           Status: usulan sudah diajukan ke yayasan dan berada pada tahap evaluasi prioritas.</div>
       </section>
 
-      <!-- Slide 8: Utilitas -->
-      <section class="pres-slide" data-title="Utilitas">
+      <!-- Slide 8: Proses Bisnis -->
+      <section class="pres-slide" data-title="Proses Bisnis">
         <span
           class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">4
+          · Proses Bisnis Unit</span>
+        <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Alur Kerja Unit Sarpras, IT, dan Lab</h2>
+        <div class="max-w-4xl w-full flex flex-col items-center">
+          <img src="probis.png" alt="Proses Bisnis"
+            class="max-w-full h-auto rounded-xl shadow-lg border border-gray-200" />
+          <p class="text-gray-600 text-lg mt-4 text-center">Diagram proses bisnis terintegrasi untuk efisiensi layanan
+            sarana prasarana sekolah.</p>
+        </div>
+      </section>
+
+      <!-- Slide 9: Utilitas -->
+      <section class="pres-slide" data-title="Utilitas">
+        <span
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">5
           · Utilitas Gedung</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Monitoring Biaya Operasional dan Efisiensi</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl">
@@ -857,10 +904,10 @@
         </div>
       </section>
 
-      <!-- Slide 9: Personil -->
+      <!-- Slide 11: Personil -->
       <section class="pres-slide" data-title="Personil Unit">
         <span
-          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">5
+          class="inline-flex w-max px-4 py-2 rounded-full bg-primary-soft text-primary font-bold text-sm border border-red-200">6
           · Personil Unit</span>
         <h2 class="text-3xl md:text-4xl font-bold m-0 text-gray-900">Tim Kerja IT, Lab, dan Sarpras</h2>
         <div class="max-w-6xl w-full">
